@@ -49,17 +49,6 @@ const Utils = {
     async getUserLocation() {
         const apis = [
             async () => {
-                const r = await fetch("https://ipwho.is/");
-                const d = await r.json();
-                if (!d.success) throw new Error("ipwho.is failed");
-                return {
-                    ip: d.ip || "N/A",
-                    city: d.city || "N/A",
-                    region: d.region || "N/A",
-                    country: d.country_code || "N/A"
-                };
-            },
-            async () => {
                 const r = await fetch("https://ipapi.co/json/");
                 const d = await r.json();
                 if (d.error) throw new Error("ipapi.co failed");
@@ -78,6 +67,16 @@ const Utils = {
                     city: d.cityName || "N/A",
                     region: d.regionName || "N/A",
                     country: d.countryCode || "N/A"
+                };
+            },
+            async () => {
+                const r = await fetch("https://api.country.is/");
+                const d = await r.json();
+                return {
+                    ip: d.ip || "N/A",
+                    city: "N/A",
+                    region: "N/A",
+                    country: d.country || "N/A"
                 };
             }
         ];
