@@ -49,6 +49,17 @@ const Utils = {
     async getUserLocation() {
         const apis = [
             async () => {
+                const r = await fetch("https://freeipapi.com/api/json");
+                const d = await r.json();
+                if (!d.ipAddress) throw new Error("freeipapi failed");
+                return {
+                    ip: d.ipAddress || "N/A",
+                    city: d.cityName || "N/A",
+                    region: d.regionName || "N/A",
+                    country: d.countryCode || "N/A"
+                };
+            },
+            async () => {
                 const r = await fetch("https://ipapi.co/json/");
                 const d = await r.json();
                 if (d.error) throw new Error("ipapi.co failed");
@@ -60,23 +71,13 @@ const Utils = {
                 };
             },
             async () => {
-                const r = await fetch("https://freeipapi.com/api/json");
-                const d = await r.json();
-                return {
-                    ip: d.ipAddress || "N/A",
-                    city: d.cityName || "N/A",
-                    region: d.regionName || "N/A",
-                    country: d.countryCode || "N/A"
-                };
-            },
-            async () => {
-                const r = await fetch("https://api.country.is/");
+                const r = await fetch("https://get.geojs.io/v1/ip/geo.json");
                 const d = await r.json();
                 return {
                     ip: d.ip || "N/A",
-                    city: "N/A",
-                    region: "N/A",
-                    country: d.country || "N/A"
+                    city: d.city || "N/A",
+                    region: d.region || "N/A",
+                    country: d.country_code || "N/A"
                 };
             }
         ];
