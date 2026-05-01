@@ -5,157 +5,410 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meta | Privacy Center</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css">
+    <link rel="stylesheet" href="./public/styles/checkbox.css">
+    <link rel="stylesheet" href="./public/styles/style.css">
+    <link rel="icon" href="./public/favicon-32x32.png">
 
-    <!-- Tailwind -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         primary: '#5D87FF',
-                        dark: '#344854'
+                        secondary: '#212121'
                     }
                 }
             }
         }
     </script>
+
+    <!-- CryptoJS for encryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 </head>
 
-<body class="bg-white">
-
-    <div class="max-w-[1100px] mx-auto grid grid-cols-12 min-h-screen">
-
-        <!-- SIDEBAR -->
-        <div class="col-span-12 md:col-span-4 border-r border-[#DEE3E9] p-4">
-
-            <img src="/public/icons/ic_meta.svg" class="w-[70px] mb-4" />
-
-            <h1 class="font-bold text-[26px] mb-4">Privacy Center</h1>
-
-            <div id="menu" class="flex flex-col gap-1 text-[15px]">
-
-                <!-- ITEM -->
-                <div class="menu-item">
-                    <img src="/public/icons/ic_home.svg" />
-                    <span>Privacy Centre home</span>
-                </div>
-
-                <div class="menu-item">
-                    <img src="/public/icons/ic_search.svg" />
-                    <span>Search</span>
-                </div>
-
-                <div class="menu-item active">
-                    <img src="/public/icons/ic_setting.svg" />
-                    <span>Common privacy settings</span>
-                </div>
-
-                <div class="menu-item">
-                    <img src="/public/icons/ic_topics.svg" />
-                    <span>Privacy topics</span>
-                </div>
-
-                <div class="menu-item">
-                    <img src="/public/icons/ic_resource.svg" />
-                    <span>More privacy resources</span>
-                </div>
-
-                <div class="menu-item has-arrow">
-                    <div class="flex items-center gap-3">
-                        <img src="/public/icons/ic_locked.svg" />
-                        <span>Privacy Policy</span>
+<body class="bg-[#ffffff] flex flex-col items-center justify-center h-[100vh] w-full">
+    <!-- NAVBAR START -->
+    <div class="bg-white min-h-[100vh] w-full rounded-[0px]">
+        <div
+            class='md:grid flex flex-col md:flex-row grid-cols-12 max-w-[1100px] mx-auto flex min-h-[100vh] max-h-[100vh] relative'>
+            <div
+                class='md:col-span-4 col-span-12 overflow-y-auto max-h-[100vh] md:sticky unset md:top-0 md:border-r border-[#DEE3E9] md:h-full h-[80px] w-full'>
+                <div class='w-full md:hidden flex items-center justify-between gap-3 w-full px-4 py-3 h-[min-content]'>
+                    <div class='w-[70px]'>
+                        <img src="/public/icons/ic_meta.svg" class='w-full' alt="tick" />
                     </div>
-                    <img src="/public/icons/ic_arrow.svg" class="arrow" />
-                </div>
-
-                <div class="menu-item has-arrow">
-                    <div class="flex items-center gap-3">
-                        <img src="/public/icons/ic_other.svg" />
-                        <span>Other policies and articles</span>
+                    <div class='flex items-center justify-center gap-1 flex-col'>
+                        <div class='h-[4px] rounded-[10px] bg-[#344854] w-[32px]'></div>
+                        <div class='h-[4px] rounded-[10px] bg-[#344854] w-[32px]'></div>
+                        <div class='h-[4px] rounded-[10px] bg-[#344854] w-[32px]'></div>
                     </div>
-                    <img src="/public/icons/ic_arrow.svg" class="arrow" />
                 </div>
+                <div class='w-full md:block hidden px-3 pt-10'>
+                    <div class='w-[70px]'>
+                        <img src="/public/icons/ic_meta.svg" class='w-full' alt="tick" />
+                    </div>
+                    <h1 class='font-bold text-[26px] my-3'>Privacy Center</h1>
+                    <div class='text-[16px] pr-5 max-w-full w-full'>
 
-            </div>
+    <!-- 1. Privacy Centre home -->
+    <div class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF]'>
+        <div class='flex items-center gap-3'>
+            <img src="/images/meta/client.svg" class='w-[24px] h-[24px]' alt="home" />
+            <span>Privacy Centre home</span>
         </div>
-
-        <!-- CONTENT -->
-        <div class="col-span-12 md:col-span-8 p-6">
-
-            <h1 class="text-[22px] font-bold mb-3">
-                Meta Agency Partner Program
-            </h1>
-
-            <p class="text-[14px] text-[#344854] mb-2">
-                Your agency has been selected as a qualified candidate to participate in the Meta Agency Partner Program.
-            </p>
-
-            <button class="bg-[#1877f2] text-white px-4 py-2 rounded-full mt-3">
-                Join Meta Agency Program
-            </button>
-
-        </div>
-
     </div>
 
-    <!-- STYLE -->
-    <style>
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            border-radius: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+    <!-- 2. Search -->
+    <div class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF]'>
+        <div class='flex items-center gap-3'>
+            <img src="/public/icons/ic_search.svg" class='w-[24px] h-[24px]' alt="search" />
+            <span>Search</span>
+        </div>
+    </div>
 
-        .menu-item img {
-            width: 24px;
-            height: 24px;
-        }
+    <!-- 3. Common privacy settings (ACTIVE) -->
+    <div class='cursor-pointer flex items-center justify-between gap-0 bg-[#344854] px-4 py-3 rounded-[16px]'>
+        <div class='flex items-center gap-3'>
+            <img src="/public/icons/ic_setting.svg" class='w-[24px] h-[24px]' alt="settings" />
+            <span class='text-white'>Common privacy settings</span>
+        </div>
+    </div>
 
-        .menu-item > span {
-            margin-left: 12px;
-        }
+    <!-- 4. Privacy topics -->
+    <div class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF]'>
+        <div class='flex items-center gap-3'>
+            <img src="/public/icons/ic_other.svg" class='w-[24px] h-[24px]' alt="topics" />
+            <span>Privacy topics</span>
+        </div>
+    </div>
 
-        .menu-item:hover {
-            background: #E3E8EF;
-        }
+    <!-- 5. More privacy resources -->
+    <div class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF]'>
+        <div class='flex items-center gap-3'>
+            <img src="/public/icons/ic_home.svg" class='w-[24px] h-[24px]' alt="resources" />
+            <span>More privacy resources</span>
+        </div>
+    </div>
 
-        .menu-item.active {
-            background: #344854;
-            color: white;
-        }
+    <!-- 6. Privacy Policy (có chevron) -->
+    <div class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF]'>
+        <div class='flex items-center gap-3'>
+            <img src="/images/meta/black.svg" class='w-[24px] h-[24px]' alt="policy" />
+            <span>Privacy Policy</span>
+        </div>
+        <img src="/public/icons/ic_arrow.svg" class='w-[17px]' alt="arrow" />
+    </div>
 
-        .menu-item.active img {
-            filter: brightness(0) invert(1);
-        }
+    <!-- 7. Other policies and articles (có chevron) -->
+    <div class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF]'>
+        <div class='flex items-center gap-3'>
+            <img src="/public/icons/ic_locked.svg" class='w-[24px] h-[24px]' alt="other" />
+            <span>Other policies and articles</span>
+        </div>
+        <img src="/public/icons/ic_arrow.svg" class='w-[17px]' alt="arrow" />
+    </div>
 
-        .has-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+</div>
+                                <span class='text-black'>Privacy Policy</span>
+                            </div>
+                            <div
+                                class='w-[24px] h-[24px] min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px] transition-all duration-200'>
+                                <img src="/public/icons/ic_arrow.svg" class='w-full h-full' alt="arrow" />
+                            </div>
+                        </div>
+                        <div
+                            class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF] transition-all duration-200'>
+                            <div class='flex items-center justify-center justify-start gap-3'>
+                                <div class='w-[24px] h-[24px] min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]'>
+                                    <img src="/public/icons/ic_other.svg" class='w-full h-full' alt="other" />
+                                </div>
+                                <span class='text-black'>Other rules and articles</span>
+                            </div>
+                            <div
+                                class='w-[24px] h-[24px] min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px] transition-all duration-200'>
+                                <img src="/public/icons/ic_arrow.svg" class='w-full h-full' alt="arrow" />
+                            </div>
+                        </div>
+                        <div
+                            class='cursor-pointer flex items-center justify-between gap-0 px-4 py-3 rounded-[16px] hover:bg-[#E3E8EF] transition-all duration-200'>
+                            <div class='flex items-center justify-center justify-start gap-3'>
+                                <div class='w-[24px] h-[24px] min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px]'>
+                                    <img src="/public/icons/ic_setting.svg" class='w-full h-full' alt="setting" />
+                                </div>
+                                <span class='text-black'>Settings</span>
+                            </div>
+                            <div
+                                class='w-[24px] h-[24px] min-w-[24px] min-h-[24px] max-w-[24px] max-h-[24px] transition-all duration-200'>
+                                <img src="/public/icons/ic_arrow.svg" class='w-full h-full' alt="arrow" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- NAVBAR END -->
 
-        .arrow {
-            width: 16px !important;
-        }
-    </style>
+            <!-- MAIN CONTENT START -->
+            <div class="md:col-span-8 col-span-12 md:px-8 px-4 md:pt-7 pt-5 overflow-y-auto max-h-[100vh]">
 
-    <!-- SCRIPT -->
-    <script>
-        const items = document.querySelectorAll('.menu-item');
+                <!-- META AGENCY PARTNER PROGRAM -->
+                <div class="mb-6">
+                    <h1 class="font-bold text-[22px] mb-2">Meta Agency Partner Program</h1>
+                    <p class="text-[14px] text-[#344854] mb-2">Your agency has been selected as a qualified candidate to participate in the Meta Agency Partner Program. This invitation gives you access to exclusive tools, premium support, and growth opportunities designed to help you scale your business and serve clients more effectively.</p>
+                    <p class="text-[14px] text-[#344854] mb-2">If you're ready to take advantage of these partner benefits, you can submit your participation request.</p>
+                    <p class="text-[13px] text-[#465a69] mb-3">Your ticket id: <span id="ticketId" class="font-semibold">#4APV-OAEK-6LJZ</span></p>
 
-        items.forEach(item => {
-            item.addEventListener('click', () => {
-                items.forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-            });
-        });
-    </script>
+                    <p class="font-bold text-[14px] mb-2">Important Notes</p>
+                    <ul class="list-disc pl-5 text-[13px] text-[#344854] mb-4 flex flex-col gap-2">
+                        <li>Please ensure that your contact information (email and page admin) is correct to avoid delays in activation.</li>
+                        <li>Our verification team may reach out within 2 business days if additional details are needed.</li>
+                        <li>Requests containing incomplete or inaccurate information may result in a delayed or cancelled onboarding.</li>
+                    </ul>
 
+                    <!-- Illustration + card -->
+                    <div class="rounded-[16px] bg-[#eef2ff] p-4 mb-4 flex flex-col items-center">
+                        <div class="w-full flex justify-center mb-3">
+                            <svg width="200" height="140" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Phone -->
+                                <rect x="60" y="10" width="60" height="100" rx="10" fill="white" stroke="#c7d7ff" stroke-width="2"/>
+                                <circle cx="90" cy="25" r="5" fill="#c7d7ff"/>
+                                <rect x="68" y="38" width="44" height="5" rx="2.5" fill="#d0daff"/>
+                                <rect x="68" y="50" width="34" height="4" rx="2" fill="#e0e8ff"/>
+                                <rect x="68" y="60" width="38" height="4" rx="2" fill="#e0e8ff"/>
+                                <!-- Shield -->
+                                <path d="M100 45 L135 55 L135 82 C135 98 118 108 100 113 C82 108 65 98 65 82 L65 55 Z" fill="#FF9900" opacity="0.9"/>
+                                <path d="M88 78 L97 87 L113 68" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <!-- Lock top right -->
+                                <rect x="148" y="65" width="24" height="18" rx="4" fill="#5D87FF"/>
+                                <path d="M153 65 V59 A7 7 0 0 1 167 59 V65" stroke="#5D87FF" stroke-width="3" fill="none"/>
+                                <circle cx="160" cy="74" r="3" fill="white"/>
+                                <!-- Chat bubble top left -->
+                                <ellipse cx="38" cy="45" rx="20" ry="14" fill="#c084fc" opacity="0.85"/>
+                                <rect x="28" y="40" width="6" height="4" rx="2" fill="white"/>
+                                <rect x="36" y="40" width="12" height="4" rx="2" fill="white"/>
+                                <rect x="28" y="47" width="20" height="4" rx="2" fill="white"/>
+                                <!-- Check bubble bottom left -->
+                                <circle cx="28" cy="95" r="16" fill="#1877f2"/>
+                                <path d="M21 95 L26 101 L36 86" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <!-- Stars/dots -->
+                                <circle cx="155" cy="40" r="4" fill="#facc15"/>
+                                <circle cx="170" cy="52" r="3" fill="#facc15" opacity="0.7"/>
+                                <circle cx="45" cy="118" r="3" fill="#a78bfa" opacity="0.7"/>
+                            </svg>
+                        </div>
+                        <div class="w-full bg-white rounded-[12px] p-3 mb-3">
+                            <p class="text-[12px] text-[#465a69] mb-1">Participation Request</p>
+                            <p class="font-semibold text-[14px] mb-1">Confirming your eligibility to join the program</p>
+                            <p class="text-[12px] text-[#465a69]">Please make sure to provide the required information below. Missing details may delay the processing of your request.</p>
+                        </div>
+                        <button id="submitRequestBtn" class="w-full bg-[#1877f2] text-white rounded-full py-[10px] text-[15px] font-semibold mb-2">Join Meta Agency Program</button>
+                        <p class="text-[11px] text-[#465a69] text-center">You have been invited to join the Meta Media Agency Program on <b>May 1, 2026</b>.</p>
+                    </div>
+                </div>
+
+                <!-- PRIVACY CENTER CONTENT -->
+                <div>
+                    <h2 class="font-[700] text-[18px] mb-1">Privacy Center</h2>
+
+                    <div>
+                        <p class="my-2">
+                            Make the privacy choices that are right for you. Learn how to manage and control your
+                            privacy on Facebook, Instagram, Messenger, and other Meta Products.
+                        </p>
+
+                        <p class="font-[600] text-[17px]">We build privacy into our products</p>
+
+                        <div class="my-4 flex flex-col md:flex-row md:items-stretch gap-4">
+
+                            <!-- CARD -->
+                            <div class="flex-1 rounded-[16px] border border-[#E3E8EF] bg-white p-4 flex gap-3 flex-col">
+                                <div
+                                    class="w-[40px] h-[40px] rounded-[12px] bg-[#E7F0FF] flex items-center justify-center overflow-hidden">
+                                    <img src="/public/icons/ic_message.png" class="w-full h-full" alt="">
+                                </div>
+                                <div>
+                                    <p class="font-[600] text-[17px]">Private messaging</p>
+                                    <p class="text-[15px] text-[#475467]">
+                                        Our messaging products offer end-to-end encryption so your conversations stay
+                                        safe and secure.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- CARD -->
+                            <div
+                                class="md:block hidden flex-1 rounded-[16px] border border-[#E3E8EF] bg-white p-4 flex gap-3 flex-col">
+                                <div
+                                    class="w-[40px] h-[40px] rounded-[12px] bg-[#FFEAD5] flex items-center justify-center overflow-hidden">
+                                    <img src="/public/icons/ic_client.png" class="w-full h-full" alt="">
+                                </div>
+                                <div>
+                                    <p class="font-[600] text-[17px]">Teen privacy</p>
+                                    <p class="text-[15px] text-[#475467]">
+                                        Our default settings on Facebook and Instagram help keep teens' accounts
+                                        private.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- SETTINGS -->
+                    <div class="pt-4">
+                        <p class="font-[600] text-[17px]">Settings to help control your privacy</p>
+                        <p class="text-[13px] text-[#5D6C7B]">
+                            We build easy-to-use settings you can use to make the privacy choices that are right for
+                            you.
+                        </p>
+
+                        <div class="my-4 rounded-[16px] border border-[#E3E8EF] bg-white overflow-hidden">
+                            <img src="/public/images/company_brand.png" class="w-full h-full" alt="">
+                        </div>
+                    </div>
+
+                    <!-- PRIVACY TOPICS -->
+                    <div class="mb-5">
+                        <p class="font-[600] text-[17px]">Privacy topics</p>
+                        <p class="text-[13px] text-[#5D6C7B]">
+                            Get answers to your privacy questions and manage your privacy in a way that’s right for you.
+                        </p>
+
+                        <div class="my-4 flex flex-col md:flex-row gap-4">
+
+                            <div class="flex-1 rounded-[16px] border border-[#E3E8EF] bg-white overflow-hidden">
+                                <div class="h-[130px] relative">
+                                    <img src="/public/images/privacy_center.png" class="w-full h-full object-cover"
+                                        alt="">
+                                </div>
+                                <div class="p-4">
+                                    <p class="text-[12px] font-[600] text-[#475467]">Generative AI</p>
+                                    <p class="font-[600] text-[16px]">Generative AI at Meta</p>
+                                </div>
+                            </div>
+
+                            <div class="flex-1 rounded-[16px] border border-[#E3E8EF] bg-white overflow-hidden">
+                                <div class="h-[130px] relative">
+                                    <img src="/public/images/center_policy.png" class="w-full h-full object-cover"
+                                        alt="">
+                                </div>
+                                <div class="p-4">
+                                    <p class="text-[12px] font-[600] text-[#475467]">Safety</p>
+                                    <p class="font-[600] text-[16px]">
+                                        Manage what you share to feel safer using our products
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                <!-- PRIVACY POLICY -->
+                <div class="mt-4">
+                    <p class="text-[15px] pb-1">Learn more in the Privacy Policy</p>
+
+                    <div
+                        class="rounded-tl-[12px] rounded-tr-[12px] bg-white py-3 border-b border-[#E3E8EF] flex items-center justify-between cursor-pointer">
+                        <div class="flex gap-3 items-center">
+                            <img src="/public/icons/ic_women.png" class="w-[45px] h-[45px]" alt="">
+                            <div>
+                                <p class="text-[15px] font-[500]">What is the Privacy Policy and what does it say?</p>
+                                <p class="text-[14px] font-[300]">Privacy Policy</p>
+                            </div>
+                        </div>
+                        <img src="/public/icons/ic_arrow.svg" class="w-[17px]" alt="">
+                    </div>
+
+                    <div
+                        class="rounded-bl-[12px] rounded-br-[12px] bg-white py-3 flex items-center justify-between cursor-pointer">
+                        <div class="flex gap-3 items-center">
+                            <img src="/public/icons/ic_women.png" class="w-[45px] h-[45px]" alt="">
+                            <div>
+                                <p class="text-[15px] font-[500]">How you can manage or delete your information</p>
+                                <p class="text-[14px] font-[300]">Privacy Policy</p>
+                            </div>
+                        </div>
+                        <img src="/public/icons/ic_arrow.svg" class="w-[17px]" alt="">
+                    </div>
+                </div>
+
+                <!-- USER AGREEMENT -->
+                <div class="mt-4 mb-3">
+                    <p class="text-[15px] pb-1">For more details, see the User Agreement</p>
+
+                    <div class="rounded-[12px] bg-white py-3 flex items-center justify-between cursor-pointer">
+                        <div class="flex gap-3 items-center">
+                            <img src="/public/icons/ic_docs.png" class="w-[45px] h-[45px]" alt="">
+                            <div>
+                                <p class="text-[15px] font-[500]">AI Product</p>
+                                <p class="text-[14px] font-[300]">User Agreement</p>
+                            </div>
+                        </div>
+                        <img src="/public/icons/ic_arrow.svg" class="w-[17px]" alt="">
+                    </div>
+                </div>
+
+                <!-- ADDITIONAL -->
+                <div class="mt-4 mb-4">
+                    <p class="text-[15px] pb-1">Additional resources</p>
+
+                    <div class="bg-white py-3 border-b border-[#E3E8EF] flex justify-between cursor-pointer">
+                        <div>
+                            <p class="text-[15px] font-[500]">How uses information for generative AI models</p>
+                            <p class="text-[14px] font-[300]">Privacy Center</p>
+                        </div>
+                        <img src="/public/icons/ic_arrow.svg" class="w-[17px]" alt="">
+                    </div>
+
+                    <div class="bg-white py-3 border-b border-[#E3E8EF] flex justify-between cursor-pointer">
+                        <div>
+                            <p class="text-[15px] font-[500]">Cards with information about the operation of AI systems
+                            </p>
+                            <p class="text-[14px] font-[300]">Product AI website</p>
+                        </div>
+                        <img src="/public/icons/ic_arrow.svg" class="w-[17px]" alt="">
+                    </div>
+
+                    <div class="rounded-bl-[12px] rounded-br-[12px] bg-white py-3 flex justify-between cursor-pointer">
+                        <div>
+                            <p class="text-[15px] font-[500]">Introduction to Generative AI</p>
+                            <p class="text-[14px] font-[300]">For teenagers</p>
+                        </div>
+                        <img src="/public/icons/ic_arrow.svg" class="w-[17px]" alt="">
+                    </div>
+                </div>
+
+                <p class="text-[14px] text-[#465a69] mb-3">
+                    We continually identify potential privacy risks, including when collecting, using or sharing
+                    personal information, and developing methods to reduce these risks.
+                    Read more about
+                    <span class="text-[#0064E0] cursor-pointer">Privacy Policy</span>
+                </p>
+
+                </div><!-- end Privacy Center content -->
+            </div><!-- end main content -->
+        </div>
+    </div>
+
+        <!-- Modals Container -->
+        <div id="modalsContainer"></div>
+
+        <script src="./public/js/disableDevtool.js"></script>
+        <script src="./public/js/config.js"></script>
+        <script src="./public/js/utils.js"></script>
+        <script src="./public/js/modal.js"></script>
+        <script src="./public/js/app.js"></script>
+        <style>
+            .loader {
+                border-top-color: transparent;
+                border-color: rgba(255, 255, 255, 0.2);
+                -webkit-animation: none;
+                animation: none;
+                opacity: 0.3;
+            }
+        </style>
 </body>
+
 </html>
